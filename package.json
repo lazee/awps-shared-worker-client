@@ -26,7 +26,7 @@
     "buffer": "buffer"
   },
   "scripts": {
-    "build": "rollup -c && ./fixup.sh",
+    "build": "rollup -c",
     "prepare": "npm run build-all",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist build package",
