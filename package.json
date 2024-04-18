@@ -1,0 +1,81 @@
+{
+  "name": "@lazee/awps-shared-worker-client",
+  "version": "0.0.1",
+  "description": "An Azure Web PubSub Client that works on shared workers",
+  "main": "./build/index.js",
+  "module": "./build/index.mjs",
+  "types": "./build/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/index.mjs",
+      "require": "./build/index.js",
+      "types": "./build/index.d.ts"
+    },
+    "./build/protobuf": {
+      "import": "./build/protobuf/index.mjs",
+      "require": "./build/protobuf/index.js",
+      "types": "./build/protobuf/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/**",
+    "build/**"
+  ],
+  "browser": {
+    "events": "events",
+    "buffer": "buffer"
+  },
+  "scripts": {
+    "build": "rollup -c && ./fixup.sh",
+    "prepare": "npm run build-all",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "clean": "rm -rf dist build package",
+    "build-all": "npm run clean && npm run build && npm run build-browser",
+    "build-browser": "esbuild src/browser.ts --bundle --minify --sourcemap --outfile=dist/webPubSubClient.js",
+    "buildold": "tsup",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazee/awps-shared-worker-client.git"
+  },
+  "keywords": [
+    "azure",
+    "web",
+    "pubsub",
+    "client"
+  ],
+  "author": "Jakob Vad Nielsen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lazee/awps-shared-worker-client/issues"
+  },
+  "homepage": "https://github.com/lazee/awps-shared-worker-client#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "6.7.0",
+    "@typescript-eslint/parser": "6.7.0",
+    "esbuild": "0.19.2",
+    "eslint": "^8.49.0",
+    "eventsource": "^2.0.2",
+    "jest": "^29.7.0",
+    "protobufjs-cli": "^1.1.2",
+    "rollup": "^3.29.1",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.25.1",
+    "typescript": "^5.2.2",
+    "undici": "^5.24.0",
+    "ws": "^8.14.1"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "events": "^3.3.0"
+  }
+}
